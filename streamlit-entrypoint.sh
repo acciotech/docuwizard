@@ -5,4 +5,4 @@ python prepare.py
 
 # Start streamlit server
 echo "Starting streamlit"
-streamlit run docuwizard.py
+streamlit run app.py
