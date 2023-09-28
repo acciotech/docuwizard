@@ -19,7 +19,7 @@ st.image(
 st.header("Docuwizard")
 st.subheader("Chat with your data like a Master")
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 embeddings = OpenAIEmbeddings()
 
 # Initialize ChatOpenAI model
@@ -69,7 +69,6 @@ for message in st.session_state.messages:
 
 # Accept user input
 if prompt := st.chat_input("Ask your questions?"):
-    st.write(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("user"):

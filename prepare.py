@@ -10,7 +10,7 @@ from langchain.document_loaders import ImageCaptionLoader
 from langchain.docstore.document import Document
 import os
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
 # Initialize ChatOpenAI model
 llm = ChatOpenAI(
