@@ -9,6 +9,7 @@ from langchain.document_loaders import UnstructuredURLLoader
 from langchain.document_loaders.image import UnstructuredImageLoader
 from langchain.document_loaders import ImageCaptionLoader
 from langchain.docstore.document import Document
+from pathlib import Path
 import os
 
 # Initialize ChatOpenAI model
