@@ -12,6 +12,10 @@ import os
 import pytube
 import openai
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Chat UI title
 st.image(
     "https://www.agmo.group/wp-content/uploads/2021/04/Agmo-Holdings-Logo-White.png"
@@ -19,12 +23,11 @@ st.image(
 st.header("Docuwizard")
 st.subheader("Chat with your data like a Master")
 
-os.environ["OPENAI_API_KEY"] = "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"
 embeddings = OpenAIEmbeddings()
 
 # Initialize ChatOpenAI model
 llm = ChatOpenAI(
-    temperature=0, max_tokens=1000, model_name="gpt-3.5-turbo", streaming=True
+    temperature=0.3, max_tokens=1000, model_name="gpt-3.5-turbo", streaming=True
 )
 
 

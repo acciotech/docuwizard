@@ -5,12 +5,16 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import UnstructuredFileLoader
+from langchain.document_loaders import UnstructuredURLLoader
 from langchain.document_loaders.image import UnstructuredImageLoader
 from langchain.document_loaders import ImageCaptionLoader
 from langchain.docstore.document import Document
 import os
 
-os.environ["OPENAI_API_KEY"] = "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"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Initialize ChatOpenAI model
 llm = ChatOpenAI(
@@ -19,10 +23,25 @@ llm = ChatOpenAI(
 
 embeddings = OpenAIEmbeddings()
 
+# get all files from sources into a list
+
+folder_path = "sources"
 documents = []
-loader = UnstructuredFileLoader("agmo2023.pdf")
-loaded_documents = loader.load()
-documents.extend(loaded_documents)
+files = os.listdir(folder_path)
+
+for f in files:
+    full_path = os.path.join(folder_path, f)
+    loader = UnstructuredFileLoader(full_path)
+    loaded_documents = loader.load()
+    documents.extend(loaded_documents)
+
+# load urls
+
+urls = ["https://www.agmo.group/about-us-2/"]
+loader = UnstructuredURLLoader(urls=urls)
+loaded_websites = loader.load()
+documents.extend(loaded_websites)
+
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
 document_chunks = text_splitter.split_documents(documents)
