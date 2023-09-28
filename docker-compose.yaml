@@ -14,6 +14,7 @@ services:
       - "8000:8000"
     volumes:
       - ./db_metadata_v5:/app/db_metadata
+      - ./chroma:/app/chroma
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       STREAMLIT_SERVER_PORT: ${STREAMLIT_SERVER_PORT}
