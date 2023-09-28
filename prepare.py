@@ -11,11 +11,6 @@ from langchain.document_loaders import ImageCaptionLoader
 from langchain.docstore.document import Document
 import os
 
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
 # Initialize ChatOpenAI model
 llm = ChatOpenAI(
     temperature=0, max_tokens=1000, model_name="gpt-3.5-turbo", streaming=True
@@ -46,6 +41,7 @@ documents.extend(loaded_websites)
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
 document_chunks = text_splitter.split_documents(documents)
 
+Path("./chroma").mkdir(parents=True, exist_ok=True)
 vectordb = Chroma.from_documents(
     document_chunks, embeddings, persist_directory="chroma"
 )

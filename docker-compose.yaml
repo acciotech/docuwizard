@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+
+  streamlit:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    hostname: streamlit
+    container_name: streamlit
+    entrypoint: /app/streamlit-entrypoint.sh
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./db_metadata_v5:/app/db_metadata
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      STREAMLIT_SERVER_PORT: ${STREAMLIT_SERVER_PORT}
+      STREAMLIT_SERVER_ADDRESS: ${STREAMLIT_SERVER_ADDRESS}
+      STREAMLIT_SERVER_ENABLE_CORS: ${STREAMLIT_SERVER_ENABLE_CORS}
+      STREAMLIT_SERVER_ENABLE_WEBSOCKET_COMPRESSION: ${STREAMLIT_SERVER_ENABLE_WEBSOCKET_COMPRESSION}
+      STREAMLIT_SERVER_HEADLESS: ${STREAMLIT_SERVER_HEADLESS}
+      STREAMLIT_THEME_BACKGROUND_COLOR: ${STREAMLIT_THEME_BACKGROUND_COLOR}
+      STREAMLIT_UI_HIDE_SIDEBAR_NAV: ${STREAMLIT_UI_HIDE_SIDEBAR_NAV}
+      STREAMLIT_GLOBAL_DEVELOPMENT_MODE: ${STREAMLIT_GLOBAL_DEVELOPMENT_MODE}
+      STREAMLIT_BROWSER_GATHER_USAGE_STATS: ${STREAMLIT_BROWSER_GATHER_USAGE_STATS}
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8000/_stcore/health"]
+      interval: 5s
+      retries: 5

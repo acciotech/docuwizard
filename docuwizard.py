@@ -12,10 +12,6 @@ import os
 import pytube
 import openai
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
 # Chat UI title
 st.image(
     "https://www.agmo.group/wp-content/uploads/2021/04/Agmo-Holdings-Logo-White.png"
